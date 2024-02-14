@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/wgu_capstone_ai_image_detector/static/css/main.6aef23aa.css",
+    "main.js": "/wgu_capstone_ai_image_detector/static/js/main.f724e298.js",
+    "static/media/training_validation.png": "/wgu_capstone_ai_image_detector/static/media/training_validation.9afb4ef200f3bc3d47c5.png",
+    "static/media/model_diagram.png": "/wgu_capstone_ai_image_detector/static/media/model_diagram.07674944b8e79de57039.png",
+    "static/media/heat_map.png": "/wgu_capstone_ai_image_detector/static/media/heat_map.d9f24fab22e11f841893.png",
+    "index.html": "/wgu_capstone_ai_image_detector/index.html",
+    "main.6aef23aa.css.map": "/wgu_capstone_ai_image_detector/static/css/main.6aef23aa.css.map",
+    "main.f724e298.js.map": "/wgu_capstone_ai_image_detector/static/js/main.f724e298.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6aef23aa.css",
+    "static/js/main.f724e298.js"
+  ]
+}
