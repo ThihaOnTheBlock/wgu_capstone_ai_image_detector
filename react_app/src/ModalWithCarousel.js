@@ -20,7 +20,7 @@ const CarouselModal = ({ data }) => {
       left: 0,
       right: 0,
       bottom: 0,
-      width: "50%",
+      width: "100%",
       height: "80%",
       margin: "auto",
       borderRadius: "10px",
@@ -34,7 +34,7 @@ const CarouselModal = ({ data }) => {
   };
 
   return (
-    <>
+    <div>
       <button style={{ fontSize: "15px" }} onClick={() => setModalIsOpen(true)}>
         View the visualizations of the model
       </button>
@@ -91,11 +91,11 @@ const CarouselModal = ({ data }) => {
           ))}
         </Swiper>
 
-        <h1 className="text-sm text-center mt-5 mb-5 leading-relaxed font-bold font-mono">
+        <h1 className="text-sm text-center mt-5 mb-5 md:mt-11 md:ml-11 md:mr-11 leading-relaxed font-bold font-mono">
           {data[currentIdx].description}
         </h1>
       </Modal>
-    </>
+    </div>
   );
 };
 

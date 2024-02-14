@@ -1,5 +1,5 @@
 import heat_map from "./images/heat_map.png";
-import roc from "./images/roc.png";
+import model_diagram from "./images/model_diagram.png";
 import training_validation from "./images/training_validation.png";
 
 const graphs_data = [
@@ -7,8 +7,9 @@ const graphs_data = [
     title: "Heat Map of the Model's Confusion Matrix",
     src: heat_map,
     altText: "Heat Map",
-    description:
-      "The heat map shows the confusion matrix of the model. The model has a high true positive rate and a low false positive rate. The model has a high true negative rate and a low false negative rate. The model has a high accuracy rate. The model has a high precision rate. The model has a high recall rate. The model has a high F1 score. The model has a high AUC score. The model has a high ROC score. The model has a high training accuracy rate. The model has a high validation accuracy rate. The model has a high training loss rate. The model has a low validation loss rate. The model has a high training precision rate. The model has a high validation precision rate. The model has a high training recall rate. The model has a high validation recall rate. The model has a high training F1 score. The model has a high validation F1 score. The model has a high training AUC score. The model has a high validation AUC score. The model has a high training ROC score. The model has a high validation ROC score.",
+    description: `The confusion matrix shows a distribution of true positives (TP=4439), true negatives (TN=5478), false positives (FP=4522), and false negatives (FN=5561). 
+      The relatively high numbers of false positives and false negatives compared to true positives and true negatives highlighted a challenge in achieving balance in the model's sensitivity (recall) and specificity. 
+      This imbalance suggested that while the model was generally accurate, its ability to consistently identify FAKE images without mistakenly classifying REAL images as FAKE (or vice versa) could be enhanced.`,
     style: {
       width: "750px",
       height: "450px",
@@ -19,16 +20,20 @@ const graphs_data = [
     },
   },
   {
-    title: "ROC Curve",
-    src: roc,
-    altText: "ROC",
-    description:
-      "The heat map shows the confusion matrix of the model. The model has a high true positive rate and a low false positive rate. The model has a high true negative rate and a low false negative rate. The model has a high accuracy rate. The model has a high precision rate. The model has a high recall rate. The model has a high F1 score. The model has a high AUC score. The model has a high ROC score. The model has a high training accuracy rate. The model has a high validation accuracy rate. The model has a high training loss rate. The model has a low validation loss rate. The model has a high training precision rate. The model has a high validation precision rate. The model has a high training recall rate. The model has a high validation recall rate. The model has a high training F1 score. The model has a high validation F1 score. The model has a high training AUC score. The model has a high validation AUC score. The model has a high training ROC score. The model has a high validation ROC score.",
+    title: "Model Diagram",
+    src: model_diagram,
+    altText: "Model Diagram",
+    description: `The above image shows the architecture of the model using the ResNet50V2 as a base layer, followed by a classification head. 
+    It begins with an input layer designed for images of size 32x32 pixels with 3 channels (RGB color channels). 
+    The core of the network is a pre-trained ResNet50V2 model on ImageNet dataset, which processes the input and outputs a 2048-dimensional feature vector. 
+    This vector is then passed through a dense (fully connected) layer that reduces the dimensionality to 256, followed by a dropout layer for regularization, which helps prevent overfitting by randomly setting input units to 0 at each update during training time. 
+    The final dense layer outputs a single value necessary for a binary classification task. The value represents the probability of the input image being real (0) or fake (1). 
+    `,
     style: {
-      width: "750px",
-      height: "450px",
+      width: "450px",
+      height: "350px",
       borderRadius: "10px",
-      marginTop: "15px",
+      marginTop: "45px",
       marginLeft: "auto",
       marginRight: "auto",
     },
@@ -37,8 +42,10 @@ const graphs_data = [
     title: "Training and Validation Graphs",
     src: training_validation,
     altText: "Training and Validation",
-    description:
-      "The heat map shows the confusion matrix of the model. The model has a high true positive rate and a low false positive rate. The model has a high true negative rate and a low false negative rate. The model has a high accuracy rate. The model has a high precision rate. The model has a high recall rate. The model has a high F1 score. The model has a high AUC score. The model has a high ROC score. The model has a high training accuracy rate. The model has a high validation accuracy rate. The model has a high training loss rate. The model has a low validation loss rate. The model has a high training precision rate. The model has a high validation precision rate. The model has a high training recall rate. The model has a high validation recall rate. The model has a high training F1 score. The model has a high validation F1 score. The model has a high training AUC score. The model has a high validation AUC score. The model has a high training ROC score. The model has a high validation ROC score.",
+    description: `The above graphs depict the performance of the model during and after the training. 
+    Training accuracy and loss improve consistently, suggesting effective learning. 
+    However, the variability in validation loss and the occasional divergences between training and validation accuracy hint at possible overfitting. 
+    To enhance generalization and stabilize validation performance, strategies such as dropout, data augmentation, and learning rate adjustments could be considered.`,
     style: {
       width: "850px",
       height: "450px",

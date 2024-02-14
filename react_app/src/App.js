@@ -16,7 +16,7 @@ import CarouselModal from "./ModalWithCarousel";
 
 import graphs_data from "./graphs_data.js";
 
-import { BounceLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 
 console.log(graphs_data);
 const node_env = process.env.NODE_ENV;
@@ -125,6 +125,7 @@ function App() {
           `${app_url}/models/model.json`
         );
         setModel(loadedModel);
+        setIsModelLoaded(true);
         toast.success("Model successfully loaded!");
       } catch (error) {
         console.error("Error loading the model", error);
@@ -156,102 +157,117 @@ function App() {
   }
 
   return (
-    <div className="App flex flex-col items-center space-y-16 bg-gradient-to-r from-green-400 to-blue-500 h-screen w-full">
-      <h1 className="text-6xl font-bold text-white mt-11 font-mono flex">
-        <AiFillYuque className="mr-5" /> NaturePixels Studio
+    <div className="App fixed flex flex-col items-center space-y-16 bg-gradient-to-r from-green-400 to-blue-500 h-screen w-screen">
+      <h1 className="text-4xl sm:text-6xl font-bold text-white mt-11 font-mono flex">
+        <AiFillYuque className="mr-5" />
+        <span className="text-center">NaturePixels Studio</span>
       </h1>
-      <div>
-        <h3 className="text-xl font-bold text-white font-mono">
-          Upload an image below to detect whether it is AI-generated or real.
-        </h3>
-        <div className="flex space-x-12">
-          <ImageUploader
-            style={{
-              height: 300,
-              width: 300,
-              background: "white",
-              borderRadius: "10px",
-            }}
-            imgExtension={[".jpg", ".png", ".gif"]}
-            onFileRemoved={onFileRemoved}
-            onFileAdded={(img) => {
-              onFileAdded(img);
-            }}
-            uploadIcon={
-              <FaFileUpload
-                style={
-                  imageUploaded != null
-                    ? { display: "none" }
-                    : { display: "block" }
+      {isModelLoaded ? (
+        <div className="flex flex-col w-full items-center space-y-10">
+          <h3 className="text-sm sm:text-2xl font-bold text-white text-center font-mono">
+            Upload an image below to detect whether it is AI-generated or real.
+          </h3>
+          <div className="flex flex-col sm:flex-row space-x-16 space-y-12">
+            <div className="flex justify-center">
+              <ImageUploader
+                style={{
+                  height: 300,
+                  width: 300,
+                  background: "white",
+                  borderRadius: "10px",
+                }}
+                imgExtension={[".jpg", ".png", ".gif"]}
+                onFileRemoved={onFileRemoved}
+                onFileAdded={(img) => {
+                  onFileAdded(img);
+                }}
+                uploadIcon={
+                  <FaFileUpload
+                    style={
+                      imageUploaded != null
+                        ? { display: "none" }
+                        : { display: "block" }
+                    }
+                    className="text-blue-500 text-4xl"
+                  />
                 }
-                className="text-blue-500 text-4xl"
-              />
-            }
-            deleteIcon={
-              <MdDelete
-                style={
-                  imageUploaded != null
-                    ? { display: "block" }
-                    : { display: "none" }
+                deleteIcon={
+                  <MdDelete
+                    style={
+                      imageUploaded != null
+                        ? { display: "block" }
+                        : { display: "none" }
+                    }
+                    className="text-red-500 hover:text-white text-3xl"
+                  />
                 }
-                className="text-red-500 hover:text-white text-3xl"
               />
-            }
-          />
-          <div
-            className={`bg-white w-[400px] h-[200px] text-xl font-bold mt-auto mb-auto flex flex-col items-center justify-center rounded-lg font-mono ${
-              isAiGenerated == null
-                ? "text-blue-600"
-                : isAiGenerated
-                  ? "text-red-600"
-                  : "text-green-400"
-            }`}
-          >
-            <div className="flex mb-4">
-              {isLoading ? (
-                <ClipLoader color="blue" loading={true} size={30} />
-              ) : isAiGenerated == null ? (
-                "Upload an image to detect"
-              ) : isAiGenerated ? (
-                "This image is ai-generated"
-              ) : (
-                "This image is real"
-              )}
-
-              {isAiGenerated == null ? (
-                ""
-              ) : isAiGenerated ? (
-                <FaRobot
-                  className="mt-auto mb-auto ml-2"
-                  style={isLoading ? { display: "none" } : {}}
-                ></FaRobot>
-              ) : (
-                <AiFillSafetyCertificate
-                  className="mt-auto mb-auto ml-2"
-                  style={isLoading ? { display: "none" } : {}}
-                ></AiFillSafetyCertificate>
-              )}
             </div>
-            <h3 className="text-black text-sm">
-              Probability Score: {detectionProbability} %
-            </h3>
-            <h3 className="text-black text-sm">
-              Model - Convolutional Neural Networks{" "}
-            </h3>
-            <h3 className="text-black text-sm">Model Accuracy - 96%</h3>
-            <h3 className="text-black text-sm">Dataset - CIFake </h3>
+            <div className="">
+              <div
+                className={`bg-white mr-16 w-[400px] h-[200px] text-xl font-bold flex flex-col items-center justify-center rounded-lg font-mono ${
+                  isAiGenerated == null
+                    ? "text-blue-600"
+                    : isAiGenerated
+                      ? "text-red-600"
+                      : "text-green-400"
+                }`}
+              >
+                <div className="flex mb-4">
+                  {isLoading ? (
+                    <ClipLoader color="blue" loading={true} size={30} />
+                  ) : isAiGenerated == null ? (
+                    "Upload an image to detect"
+                  ) : isAiGenerated ? (
+                    "This image is ai-generated"
+                  ) : (
+                    "This image is real"
+                  )}
 
-            <CarouselModal data={graphs_data} />
+                  {isAiGenerated == null ? (
+                    ""
+                  ) : isAiGenerated ? (
+                    <FaRobot
+                      className="mt-auto mb-auto ml-2"
+                      style={isLoading ? { display: "none" } : {}}
+                    ></FaRobot>
+                  ) : (
+                    <AiFillSafetyCertificate
+                      className="mt-auto mb-auto ml-2"
+                      style={isLoading ? { display: "none" } : {}}
+                    ></AiFillSafetyCertificate>
+                  )}
+                </div>
+                <h3 className="text-black text-sm">
+                  Probability Score: {detectionProbability} %
+                </h3>
+                <h3 className="text-black text-sm">
+                  Model - Convolutional Neural Networks{" "}
+                </h3>
+                <h3 className="text-black text-sm">Model Accuracy - 93%</h3>
+                <h3 className="text-black text-sm">Dataset - CIFake </h3>
+
+                <CarouselModal data={graphs_data} />
+              </div>
+            </div>
           </div>
+          <button
+            onClick={handleDetection}
+            className="bg-blue-600 hover:bg-blue-700 text-white w-20 mx-auto font-bold py-2 px-4 rounded"
+          >
+            Detect
+          </button>
+          <ToastContainer />
         </div>
-        <button
-          onClick={handleDetection}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Detect
-        </button>
-        <ToastContainer />
-      </div>
+      ) : (
+        <div className="flex flex-col items-center space-y-8">
+          <h3 className="text-2xl text-center font-bold text-white font-mono">
+            Loading the image classifier model...
+          </h3>
+          <BeatLoader color="white" loading={true} size={20} />
+        </div>
+      )}
+
       <Footer />
     </div>
   );
